@@ -25,7 +25,8 @@ const server = http.createServer((request, response) => {
       response.end('Not Found');
       return;
     }
-    response.setHeader('Content-Type', mimeMap[ext] || 'text/plain');
+    const mime = mimeMap[ext] || 'text/plain';
+    response.setHeader('Content-Type', mime + ';charset=utf-8');
     response.end(data);
   });
 });
