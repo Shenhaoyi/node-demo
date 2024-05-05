@@ -16,6 +16,11 @@ const mimeMap = {
 };
 
 const server = http.createServer((request, response) => {
+  if (request.method !== 'GET') {
+    response.writeHead(405);
+    response.end('Method Not Allowed');
+    return;
+  }
   const { pathname } = url.parse(request.url);
   const filePath = process.cwd() + '/public' + (pathname === '/' ? '/index.html' : pathname);
   const ext = path.extname(filePath).substring(1);
